@@ -1,0 +1,153 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link href="GeneralPage.css" rel="stylesheet" />
+</head>
+<body>
+    <header>
+        <h1>ИЖГТУ</h1>
+        <h2>ИЖЕВСКИЙ ГОСУДАРСТВЕННЫЙ ТЕХНИЧЕСКИЙ УНИВЕРСИТЕТ ИМЕНИ М.Т. КАЛАШНИКОВА</h2>
+        <div class="timeNow"></div>
+        <!-- Повернут с помощью стилей на 45 градусов. -->
+        <h4>Лучшее ПТУ России!</h4>
+    </header>
+    <nav>
+        <h3 class="h3Radius">Путеводитель по сайту</h3>
+        <a href="GeneralPage.html">Главная</a> <a href="Universitet.html">Университет</a> <a href="Obrazovanie.html">Образование</a> <a href="Nayka.html">Наука</a> <a href="Live.html">Студенческая жизнь</a> <a href="Mejdunarod.html">Международная деятельность</a> <a href="Postupit.html">Поступить!</a>
+    </nav>
+    <main>
+        <section>
+            <article>
+                <h3>Поступить в ИЖГТУ - ценное вложение в своё будущее!</h3>
+                <div>
+                    <form name="sentDataForm" action="OtprForma.html" method="get" enctype="text/plain">
+                        <p>
+                            <label for="Name">Имя: </label>
+                            <input type="text" name="NameValue" id="NameValue" />
+                            <!-- Доб. красивую галочку, что введено "ОК" -->
+
+                        </p>
+                        <p>
+                            <label for="SName">Фамилия: </label>
+                            <input type="text" name="SName" id="SName" />
+                        </p>
+                        <p>
+                            <label for="LName">Отчество: </label>
+                            <input type="text" name="LName" id="LName" placeholder="При наличии" />
+                        </p>
+                        <p>
+                            <label for="date">Дата рождения: </label>
+                            <input type="date" name="date" id="date" />
+                        </p>
+                        <fieldset>
+                            <!-- Сделаем рамку -->
+                            <legend>Выберите желаемую специальность</legend>
+                            <p>
+                                <label for="Fakultet">Специальности: </label>
+                                <select id="Fakultet" name="Fakultet">
+                                    <option value="Программная инженерия">Программная инженерия</option>
+                                    <option value="Математика и ест. науки">Математика и ест. науки</option>
+                                    <option value="Программное обесп. отрасли">Программное обесп. отрасли</option>
+                                    <option value="Стрелковое оружие">Стрелковое оружие</option>
+                                    <option value="Двигателестроение">Двигателестроение</option>
+                                    <option value="Ракетостроение">Ракетостроение</option>
+                                </select>
+                            </p>
+                        </fieldset>
+                        <p>
+                            <label for="email">Email: </label>
+                            <input type="email" name="email" id="email" />
+                        </p>
+                        <p>
+                            <label for="phone">Телефон: </label>
+                            <input type="tel" placeholder="8-(XXX)-XXX-XX-XX" name="phone" id="phone" />
+                        </p>
+                        <p>
+                            Добавьте скан документа об оразовании в формате png. <br />
+                            <input type="file" value="Вибирете файл" />
+                        </p>
+                        <p>
+                            <input type="reset" value="Сбросить" />
+                            <input type="submit" name="send" value="Отправить" />
+                        </p>
+                    </form>
+                </div>
+            </article>
+        </section>
+        <aside>
+            <br>
+            <br>
+            <br>
+            <div class="right">
+                <img src="Pic/p23.jpeg" alt="Error image" width="280" usemap="#Map1" />
+                <map name="Map1">
+                    <area href="https://www.axion.ru/rabota-v-izhevske-vakansii/" shape="rect" coords="6, 6, 276, 181" title="Светлое будущее" alt="Светлое будущее" />
+                </map>
+            </div>
+            <div class="right">
+                <img src="Pic/p24.png" alt="Error image" width="280" usemap="#Map2" />
+                <map name="Map2">
+                    <area href="https://burgerkingrus.ru/rabota" shape="rect" coords="6, 5, 272, 211" title="Светлое будущее" alt="Светлое будущее" />
+                </map>
+            </div>
+            <div class="right">
+                <img src="Pic/p25.jpeg" alt="Error image" width="280" usemap="#Map3" />
+                <map name="Map3">
+                    <area href="https://www.kfc.ru/career" shape="rect" coords="4, 6, 273, 271" title="Светлое будущее" alt="Светлое будущее" />
+                </map>
+            </div>
+        </aside>
+    </main>
+    <footer>
+        Все права защищены
+    </footer>
+    <script>
+
+        //дата и время
+        Data = new Date();
+        Year = Data.getFullYear();
+        Month = Data.getMonth();
+        Day = Data.getDate();
+        Hour = Data.getHours();
+        Minutes = Data.getMinutes();
+        // Преобразуем месяца
+        switch (Month) {
+            case 0: fMonth = "января"; break;
+            case 1: fMonth = "февраля"; break;
+            case 2: fMonth = "марта"; break;
+            case 3: fMonth = "апреля"; break;
+            case 4: fMonth = "мае"; break;
+            case 5: fMonth = "июня"; break;
+            case 6: fMonth = "июля"; break;
+            case 7: fMonth = "августа"; break;
+            case 8: fMonth = "сентября"; break;
+            case 9: fMonth = "октября"; break;
+            case 10: fMonth = "ноября"; break;
+            case 11: fMonth = "декабря"; break;
+        }
+        // поле хранящее Вывод
+        var timecalculate = `${Day} ${fMonth} ${Year} ${Hour}:${Minutes}`;
+
+        var timeNowBlock = document.querySelector("div.timeNow");
+        // создаем элемент
+        var elem = document.createElement("h2");
+        // создаем для него текст
+        var elemText = document.createTextNode(timecalculate);
+        // добавляем текст в элемент в качестве дочернего элемента
+        elem.appendChild(elemText);
+        // добавляем элемент в блок
+        timeNowBlock.appendChild(elem);
+
+
+        var sendButton = document.sentDataForm.send;
+        sendButton.addEventListener("click", sentForm);
+        function sentForm(e) {
+
+            alert("Отправка данных начата...");
+        }
+    </script>
+
+</body>
+</html>

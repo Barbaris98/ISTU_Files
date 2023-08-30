@@ -1,0 +1,124 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link href="GeneralPage.css" rel="stylesheet" />
+</head>
+<body>
+    <header>
+        <h1>ИЖГТУ</h1>
+        <h2>ИЖЕВСКИЙ ГОСУДАРСТВЕННЫЙ ТЕХНИЧЕСКИЙ УНИВЕРСИТЕТ ИМЕНИ М.Т. КАЛАШНИКОВА</h2>
+        <div class="timeNow"></div>
+        <!-- Повернут с помощью стилей на 45 градусов. -->
+        <h4>Лучшее ПТУ России!</h4>
+    </header>
+    <nav>
+        <h3 class="h3Radius">Путеводитель по сайту</h3>
+        <a href="GeneralPage.html">Главная</a> <a href="Universitet.html">Университет</a> <a href="Obrazovanie.html">Образование</a> <a href="Nayka.html">Наука</a> <a href="Live.html">Студенческая жизнь</a> <a href="Mejdunarod.html">Международная деятельность</a> <a href="Postupit.html">Поступить!</a>
+    </nav>
+    <main>
+        <section>
+            <article>
+                <h3>История</h3>
+                <p>
+                    <img src="Pic/p26.png" alt="Error image" align="right" width="350" hspace="10" />
+                    Ижевский государственный технический университет (ИжГТУ) (до 1994 года — Механический институт Министерства высшего образования СССР, Ижевский механический институт), был образован на основании Постановления Совета Министров СССР № 1034 от 22 февраля 1952 года как высшее учебное заведение Министерства высшего образования СССР для обеспечения квалифицированными инженерными кадрами промышленности СССР, города Ижевска и Удмуртской АССР.
+                </p>
+                <p>
+                    Первый прием студентов, состоявшийся в сентябре 1952 года, <span class="under">составил 200 человек</span>. Постепенно расширился список факультетов и специальностей, а в городах республики и региона (Воткинск, Сарапул, Глазов, Чайковский, Камбарка) были открыты филиалы
+                </p>
+                <p>
+                    В 2012 году университету было присвоено имя легендарного оружейника <a href="https://ru.wikipedia.org/wiki/%D0%90%D0%B2%D1%82%D0%BE%D0%BC%D0%B0%D1%82_%D0%9A%D0%B0%D0%BB%D0%B0%D1%88%D0%BD%D0%B8%D0%BA%D0%BE%D0%B2%D0%B0">Михаила Тимофеевича Калашникова</a>.
+                </p>
+            </article>
+            <article>
+                <h3>Факультеты</h3>
+                <p>
+                    <ul>
+                        <li>Машиностроительный факультет</li>
+                        <li>Институт «Современные технологии машиностроения, автомобилестроения и металлургии»</li>
+                        <li>Приборостроительный факультет</li>
+                        <li>Институт архитектуры и строительства имени В. А. Шумилова</li>
+                        <li>Институт «Информатика и вычислительная техника»</li>
+                        <li>Факультет «Математика и естественные науки»</li>
+                    </ul>
+                </p>
+                <h3>Контакты</h3>
+                <p>
+                    <b>Приемная ректора:</b> (3412) 77-20-22<br />
+                    <b>Приемная Первого проректора:</b> (3412) 77-41-33<br />
+                    <b>Главный бухгалтер:</b> (3412) 77-36-09<br />
+                    <b>Общий отдел:</b> (3412) 50-40-55<br />
+                    <br />
+                    <b>Приемная комиссия:</b> (3412) 77-62-62<br />
+                </p>
+            </article>
+        </section>
+        <aside>
+            <br>
+            <br>
+            <br>
+            <div class="right">
+                <img src="Pic/p23.jpeg" alt="Error image" width="280" usemap="#Map1" />
+                <map name="Map1">
+                    <area href="https://www.axion.ru/rabota-v-izhevske-vakansii/" shape="rect" coords="6, 6, 276, 181" title="Светлое будущее" alt="Светлое будущее" />
+                </map>
+            </div>
+            <div class="right">
+                <img src="Pic/p24.png" alt="Error image" width="280" usemap="#Map2" />
+                <map name="Map2">
+                    <area href="https://burgerkingrus.ru/rabota" shape="rect" coords="6, 5, 272, 211" title="Светлое будущее" alt="Светлое будущее" />
+                </map>
+            </div>
+            <div class="right">
+                <img src="Pic/p25.jpeg" alt="Error image" width="280" usemap="#Map3" />
+                <map name="Map3">
+                    <area href="https://www.kfc.ru/career" shape="rect" coords="4, 6, 273, 271" title="Светлое будущее" alt="Светлое будущее" />
+                </map>
+            </div>
+        </aside>
+    </main>
+    <footer>
+        Все права защищены
+    </footer>
+    <script>
+
+        //дата и время
+        Data = new Date();
+        Year = Data.getFullYear();
+        Month = Data.getMonth();
+        Day = Data.getDate();
+        Hour = Data.getHours();
+        Minutes = Data.getMinutes();
+        // Преобразуем месяца
+        switch (Month) {
+            case 0: fMonth = "января"; break;
+            case 1: fMonth = "февраля"; break;
+            case 2: fMonth = "марта"; break;
+            case 3: fMonth = "апреля"; break;
+            case 4: fMonth = "мае"; break;
+            case 5: fMonth = "июня"; break;
+            case 6: fMonth = "июля"; break;
+            case 7: fMonth = "августа"; break;
+            case 8: fMonth = "сентября"; break;
+            case 9: fMonth = "октября"; break;
+            case 10: fMonth = "ноября"; break;
+            case 11: fMonth = "декабря"; break;
+        }
+        // поле хранящее Вывод
+        var timecalculate = `${Day} ${fMonth} ${Year} ${Hour}:${Minutes}`;
+
+        var timeNowBlock = document.querySelector("div.timeNow");
+        // создаем элемент
+        var elem = document.createElement("h2");
+        // создаем для него текст
+        var elemText = document.createTextNode(timecalculate);
+        // добавляем текст в элемент в качестве дочернего элемента
+        elem.appendChild(elemText);
+        // добавляем элемент в блок
+        timeNowBlock.appendChild(elem);
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+﻿body {
+    background-color: lightgray;
+    font-family: Arial, 'Times New Roman';
+    margin: 0 auto;
+    max-width: 1500px;
+    border: solid 4px white;
+}
+
+header {
+    display: block;
+    background-color: Orange;
+    color: White;
+    text-align: center;
+}
+
+.centr {
+    text-align: center;
+}
+
+.right {
+    text-align: right;
+}
+
+.h3Radius {
+    display: block;
+    background-color: deepskyblue;
+    color: White;
+    text-align: center;
+    /*-webkit - для Chrome и Safari*/
+    -webkit-border-radius: 10px;
+    /*-moz- для Mozilla*/
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+h3 {
+    color: Orange;
+    text-align: center;
+}
+
+h4 {
+    color: Orange;
+    background-color: White;
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    text-align: left;
+    padding-left: 20px;
+    position: relative;
+    left: -240px;
+    top: -525px;
+}
+
+nav {
+    width: 20%;
+    float: left;
+}
+
+    nav a:link, nav a:visited {
+        display: block;
+        font-weight: bold;
+        padding: 10px;
+        text-decoration: none;
+        margin: 5px;
+    }
+
+    nav a:hover {
+        color: White;
+        background-color: Orange;
+    }
+
+section {
+    display: block;
+    width: 60%;
+    float: left;
+}
+
+article h3 {
+    display: block;
+    background-color: deepskyblue;
+    color: White;
+    text-align: center;
+    /*-webkit - для Chrome и Safari*/
+    -webkit-border-radius: 10px;
+    /*-moz- для Mozilla*/
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+article p {
+    margin: 10px;
+    text-align: justify;
+}
+
+aside {
+    float: left;
+    width: 20%;
+}
+
+footer {
+    clear: both;
+    color: white;
+    background-color: Orange;
+    text-align: center;
+    padding: 15px;
+}

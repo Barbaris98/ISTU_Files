@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link href="GeneralPage.css" rel="stylesheet" />
+</head>
+<body>
+    <header>
+        <h1>ИЖГТУ</h1>
+        <h2>ИЖЕВСКИЙ ГОСУДАРСТВЕННЫЙ ТЕХНИЧЕСКИЙ УНИВЕРСИТЕТ ИМЕНИ М.Т. КАЛАШНИКОВА</h2>
+        <div class="timeNow"></div>
+        <!-- Повернут с помощью стилей на 45 градусов. -->
+        <h4>Лучшее ПТУ России!</h4>
+    </header>
+    <nav>
+        <h3 class="h3Radius">Путеводитель по сайту</h3>
+        <a href="GeneralPage.html">Главная</a>
+        <a href="Universitet.html">Университет</a>
+        <a href="Obrazovanie.html">Образование</a>
+        <a href="Nayka.html">Наука</a>
+        <a href="Live.html">Студенческая жизнь</a>
+        <a href="Mejdunarod.html">Международная деятельность</a>
+        <a href="DlyaStudenta.html">Для студента</a>
+        <a href="Postupit.html">Поступить!</a>
+    </nav>
+    <main>
+        <section>
+            <article>
+                <h3>Путь к успеху начинается здесь!</h3>
+                <div class="centr">
+                    <img src="Pic/p20.png" alt="Error image" width="600" />
+                </div>
+            </article>
+            <article>
+                <h3>Всероссийская конференция «Информационные технологии в науке, промышленности и образовании» начала работу</h3>
+                <div class="centr">
+                    <img src="Pic/p21.jpg" alt="Error image" width="600" />
+                </div>
+                <p>
+                    Сегодня, 25 мая, в ИжГТУ имени М.Т. Калашникова, начала работу Всероссийская научно-техническая конференция «Информационные технологии в науке, промышленности и образовании».
+                    С приветствием на пленарном заседании к участникам обратился Александр Викторович Губерт, и.о. ректора ИжГТУ имени М.Т. Калашникова: «Конференция стала у нас традиционной, ежегодной. Вопросы, которые рассматриваются на конференции, весьма важны для развития каждой отдельной отрасли — науки, промышленности, образования. Вместе с тем, эта тема сквозная. Мы понимаем, что все процессы связаны между собой. Поэтому хотелось бы, чтобы на конференции обсудили не только текущие задачи, но и поговорили о взаимодействии всех участников этого большого процесса. Хочу пожелать всем нам оптимизма, задора и плодотворной работы. Всем большое спасибо за участие».
+                    Модератор заседания, директор Института информатики и вычислительной техники Игорь Олегович Архипов во вступительном слове отметил: «Наша конференция не стоит на месте. Каждый год происходит что-то новое. В этом году у нас появилась новая секция — «Информационная безопасность». С этого года в рамках конференции мы будем ежегодно проводить и олимпиаду по кибербезопасности. А первых победителей, участников и преподавателей, которые готовили студентов, сегодня наградим».
+                    С докладами в очном и удаленном формате на пленарном заседании выступили представители науки и бизнеса.
+                </p>
+            </article>
+        </section>
+        <aside>
+            <br>
+            <br>
+            <br>
+            <div class="right">
+                <img src="Pic/p23.jpeg" alt="Error image" width="280" usemap="#Map1" />
+                <map name="Map1">
+                    <area href="https://www.axion.ru/rabota-v-izhevske-vakansii/" shape="rect" coords="6, 6, 276, 181" title="Светлое будущее" alt="Светлое будущее" />
+                </map>
+            </div>
+            <div class="right">
+                <img src="Pic/p24.png" alt="Error image" width="280" usemap="#Map2" />
+                <map name="Map2">
+                    <area href="https://burgerkingrus.ru/rabota" shape="rect" coords="6, 5, 272, 211" title="Светлое будущее" alt="Светлое будущее" />
+                </map>
+            </div>
+            <div class="right">
+                <img src="Pic/p25.jpeg" alt="Error image" width="280" usemap="#Map3" />
+                <map name="Map3">
+                    <area href="https://www.kfc.ru/career" shape="rect" coords="4, 6, 273, 271" title="Светлое будущее" alt="Светлое будущее" />
+                </map>
+            </div>
+        </aside>
+    </main>
+    <footer>
+        Все права защищены
+    </footer>
+    <script>
+
+        //дата и время
+        Data = new Date();
+        Year = Data.getFullYear();
+        Month = Data.getMonth();
+        Day = Data.getDate();
+        Hour = Data.getHours();
+        Minutes = Data.getMinutes();
+        // Преобразуем месяца
+        switch (Month) {
+            case 0: fMonth = "января"; break;
+            case 1: fMonth = "февраля"; break;
+            case 2: fMonth = "марта"; break;
+            case 3: fMonth = "апреля"; break;
+            case 4: fMonth = "мае"; break;
+            case 5: fMonth = "июня"; break;
+            case 6: fMonth = "июля"; break;
+            case 7: fMonth = "августа"; break;
+            case 8: fMonth = "сентября"; break;
+            case 9: fMonth = "октября"; break;
+            case 10: fMonth = "ноября"; break;
+            case 11: fMonth = "декабря"; break;
+        }
+        // поле хранящее Вывод
+        var timecalculate = `${Day} ${fMonth} ${Year} ${Hour}:${Minutes}`;
+        var timeNowBlock = document.querySelector("div.timeNow");
+        // создаем элемент
+        var elem = document.createElement("h2");
+        // создаем для него текст
+        var elemText = document.createTextNode(timecalculate);
+        // добавляем текст в элемент в качестве дочернего элемента
+        elem.appendChild(elemText);
+        // добавляем элемент в блок
+        timeNowBlock.appendChild(elem);
+
+    </script>
+</body>
+</html>
