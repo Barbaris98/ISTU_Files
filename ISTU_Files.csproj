@@ -6,4 +6,30 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\FileStyle.css" />
+    <None Include="wwwroot\DlyaStudenta.html" />
+    <None Include="wwwroot\index.html" />
+    <None Include="wwwroot\Live.html" />
+    <None Include="wwwroot\Mejdunarod.html" />
+    <None Include="wwwroot\Nayka.html" />
+    <None Include="wwwroot\Obrazovanie.html" />
+    <None Include="wwwroot\OtprForma.html" />
+    <None Include="wwwroot\Pic\green-check-mark.png" />
+    <None Include="wwwroot\Pic\p20.png" />
+    <None Include="wwwroot\Pic\p21.jpg" />
+    <None Include="wwwroot\Pic\p23.jpeg" />
+    <None Include="wwwroot\Pic\p24.png" />
+    <None Include="wwwroot\Pic\p25.jpeg" />
+    <None Include="wwwroot\Pic\p26.png" />
+    <None Include="wwwroot\Pic\p27.png" />
+    <None Include="wwwroot\Pic\p28.png" />
+    <None Include="wwwroot\Pic\p29.png" />
+    <None Include="wwwroot\Pic\p30.png" />
+    <None Include="wwwroot\Pic\pic4.png" />
+    <None Include="wwwroot\Pic\pic8.png" />
+    <None Include="wwwroot\Postupit.html" />
+    <None Include="wwwroot\Universitet.html" />
+  </ItemGroup>
+
 </Project>
