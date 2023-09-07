@@ -28,11 +28,32 @@
         <section>
             <article>
                 <h3>Справочный материал</h3>
-                <a href="gggggggggggggggg">Скачать</a>
-                <button class="btn" type="button">
+                <button id="myButton" type="button">
                     Скачать картинку
                 </button>
-                <img />
+                <br>
+                <br>
+                <h3>Список пользователей</h3>
+                <div>
+                    <input type="hidden" id="studentId" />
+                    <p>
+                        Имя:<br />
+                        <input id="studentName" />
+                    </p>
+                    <p>
+                        Возраст:<br />
+                        <input id="studentAge" type="number" />
+                    </p>
+                    <p>
+                        <button id="saveBtn">Сохранить</button>
+                        <button id="resetBtn">Сбросить</button>
+                    </p>
+                </div>
+                <table>
+                    <thead><tr><th>Имя</th><th>Возраст</th><th></th></tr></thead>
+                    <tbody>
+                    </tbody>
+                </table>
             </article>
         </section>
         <aside>
@@ -42,6 +63,168 @@
         Все права защищены
     </footer>
     <script>
+        // const button = document.querySelector('#myButton');
+        const button = document.getElementById('myButton'); // Этот метод работает на порядок быстрее
+        button.addEventListener('click', getImage);
+
+        async function getImage() {
+
+            console.log("Меня нажали!"); //  Меня нажали!
+
+            const response = await fetch("/getFile.png");
+            //.....
+
+        }
+
+        ///////////////////
+        // Получение всех пользователей
+        async function getStudents() {
+            // отправляет запрос и получаем ответ
+            const response = await fetch("/api/students", {
+                method: "GET",
+                headers: { "Accept": "application/json" }
+            });
+            // если запрос прошел нормально
+            if (response.ok === true) {
+                // получаем данные
+                const students = await response.json();
+                const rows = document.querySelector("tbody");
+                // добавляем полученные элементы в таблицу
+                students.forEach(student => rows.append(row(student)));
+            }
+        }
+        // Получение одного пользователя
+        async function getStudent(id) {
+            const response = await fetch(`/api/students/${id}`, {
+                method: "GET",
+                headers: { "Accept": "application/json" }
+            });
+            if (response.ok === true) {
+                const student = await response.json();
+                document.getElementById("studentId").value = student.id;
+                document.getElementById("studentName").value = student.name;
+                document.getElementById("studentAge").value = student.age;
+            }
+            else {
+                // если произошла ошибка, получаем сообщение об ошибке
+                const error = await response.json();
+                console.log(error.message); // и выводим его на консоль
+            }
+        }
+        // Добавление пользователя
+        async function createStudent(studentName, studentAge) {
+
+            const response = await fetch("api/students", {
+                method: "POST",
+                headers: { "Accept": "application/json", "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    name: studentName,
+                    age: parseInt(studentAge, 10)
+                })
+            });
+            if (response.ok === true) {
+                const student = await response.json();
+                document.querySelector("tbody").append(row(student));
+            }
+            else {
+                const error = await response.json();
+                console.log(error.message);
+            }
+        }
+        // Изменение пользователя
+        async function editStudent(studentId, studentName, studentAge) {
+            const response = await fetch("api/students", {
+                method: "PUT",
+                headers: { "Accept": "application/json", "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    id: studentId,
+                    name: studentName,
+                    age: parseInt(studentAge, 10)
+                })
+            });
+            if (response.ok === true) {
+                const student = await response.json();
+                document.querySelector(`tr[data-rowid='${student.id}']`).replaceWith(row(student));
+            }
+            else {
+                const error = await response.json();
+                console.log(error.message);
+            }
+        }
+        // Удаление пользователя
+        async function deleteStudent(id) {
+            const response = await fetch(`/api/students/${id}`, {
+                method: "DELETE",
+                headers: { "Accept": "application/json" }
+            });
+            if (response.ok === true) {
+                const student = await response.json();
+                document.querySelector(`tr[data-rowid='${student.id}']`).remove();
+            }
+            else {
+                const error = await response.json();
+                console.log(error.message);
+            }
+        }
+
+        // сброс данных формы после отправки
+        function reset() {
+            document.getElementById("studentId").value =
+                document.getElementById("studentName").value =
+            document.getElementById("studentAge").value = "";
+        }
+        // создание строки для таблицы
+        function row(student) {
+
+            const tr = document.createElement("tr");
+            tr.setAttribute("data-rowid", student.id);
+
+            const nameTd = document.createElement("td");
+            nameTd.append(student.name);
+            tr.append(nameTd);
+
+            const ageTd = document.createElement("td");
+            ageTd.append(student.age);
+            tr.append(ageTd);
+
+            const linksTd = document.createElement("td");
+
+            const editLink = document.createElement("button");
+            editLink.append("Изменить");
+            editLink.addEventListener("click", async () => await getUser(student.id));
+            linksTd.append(editLink);
+
+            const removeLink = document.createElement("button");
+            removeLink.append("Удалить");
+            removeLink.addEventListener("click", async () => await deleteUser(student.id));
+
+            linksTd.append(removeLink);
+            tr.appendChild(linksTd);
+
+            return tr;
+        }
+        // сброс значений формы
+        document.getElementById("resetBtn").addEventListener("click", () => reset());
+
+        // отправка формы
+        document.getElementById("saveBtn").addEventListener("click", async () => {
+
+            const id = document.getElementById("studentId").value;
+            const name = document.getElementById("studentName").value;
+            const age = document.getElementById("studentAge").value;
+            if (id === "")
+                await createStudent(name, age);
+            else
+                await editStudent(id, name, age);
+            reset();
+        });
+
+        // загрузка пользователей
+        getStudents();
+
+
+
+        //////////////////////
         //дата и время
         Data = new Date();
         Year = Data.getFullYear();
@@ -75,16 +258,6 @@
         elem.appendChild(elemText);
         // добавляем элемент в блок
         timeNowBlock.appendChild(elem);
-
-
-        //////////////////////
-        const img = document.querySelector("img");
-        getImage();
-        async function getImage() {
-            const response = await fetch("/getFile.png");
-            const imgBlob = await response.blob();
-            img.src = URL.createObjectURL(imgBlob);
-        }
 
     </script>
 </body>
