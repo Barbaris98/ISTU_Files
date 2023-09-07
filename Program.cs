@@ -1,4 +1,5 @@
 using DekanatDB;
+using ISTU_Files;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,7 +16,7 @@ app.UseStaticFiles(); // добавл€ем поддержку статических файлов
 
 app.Map("/getDB", (ApplicationContext db) =>
 {
-    db.Students.ToList();
+    db.Users.ToList();
 
 });
 
@@ -40,59 +41,55 @@ app.Map("/getFile.png", () =>
 
 //код приложени€, который будет обрабатывать запросы и подключатьс€ к базе данных:
 #region
-app.MapGet("/api/students", async (ApplicationContext db) => await db.Students.ToListAsync());
+app.MapGet("/api/users", async (ApplicationContext db) => await db.Users.ToListAsync());
 
-app.MapGet("/api/students/{id:int}", async (int id, ApplicationContext db) =>
+app.MapGet("/api/users/{id:int}", async (int id, ApplicationContext db) =>
 {
     // получаем пользовател€ по id
-    Student? student = await db.Students.FirstOrDefaultAsync(u => u.Id == id);
+    User? user = await db.Users.FirstOrDefaultAsync(u => u.Id == id);
 
     // если не найден, отправл€ем статусный код и сообщение об ошибке
-    if (student == null) return Results.NotFound(new { message = "ѕользователь не найден" });
+    if (user == null) return Results.NotFound(new { message = "ѕользователь не найден" });
 
     // если пользователь найден, отправл€ем его
-    return Results.Json(student);
+    return Results.Json(user);
 });
 
-app.MapDelete("/api/students/{id:int}", async (int id, ApplicationContext db) =>
+app.MapDelete("/api/users/{id:int}", async (int id, ApplicationContext db) =>
 {
     // получаем пользовател€ по id
-    Student? student = await db.Students.FirstOrDefaultAsync(u => u.Id == id);
+    User? user = await db.Users.FirstOrDefaultAsync(u => u.Id == id);
 
     // если не найден, отправл€ем статусный код и сообщение об ошибке
-    if (student == null) return Results.NotFound(new { message = "ѕользователь не найден" });
+    if (user == null) return Results.NotFound(new { message = "ѕользователь не найден" });
 
     // если пользователь найден, удал€ем его
-    db.Students.Remove(student);
+    db.Users.Remove(user);
     await db.SaveChangesAsync();
-    return Results.Json(student);
+    return Results.Json(user);
 });
 
-app.MapPost("/api/students", async (Student student, ApplicationContext db) =>
+app.MapPost("/api/users", async (User user, ApplicationContext db) =>
 {
     // добавл€ем пользовател€ в массив
-    await db.Students.AddAsync(student);
+    await db.Users.AddAsync(user);
     await db.SaveChangesAsync();
-    return student;
+    return user;
 });
 
-app.MapPut("/api/students", async (Student studentData, ApplicationContext db) =>
+app.MapPut("/api/users", async (User userData, ApplicationContext db) =>
 {
     // получаем пользовател€ по id
-    var student = await db.Students.FirstOrDefaultAsync(u => u.Id == studentData.Id);
+    var user = await db.Users.FirstOrDefaultAsync(u => u.Id == userData.Id);
 
     // если не найден, отправл€ем статусный код и сообщение об ошибке
-    if (student == null) return Results.NotFound(new { message = "ѕользователь не найден" });
+    if (user == null) return Results.NotFound(new { message = "ѕользователь не найден" });
 
     // если пользователь найден, измен€ем его данные и отправл€ем обратно клиенту
-    student.LastName = studentData.LastName;
-    student.Name = studentData.Name;
-    student.MiddleName = studentData.MiddleName;
-    student.RecordNumber = studentData.RecordNumber;
-    student.DateOfBirth = studentData.DateOfBirth;
-    student.FacultyId = studentData.FacultyId;
+    user.Age = userData.Age;
+    user.Name = userData.Name;
     await db.SaveChangesAsync();
-    return Results.Json(student);
+    return Results.Json(user);
 });
 #endregion
 

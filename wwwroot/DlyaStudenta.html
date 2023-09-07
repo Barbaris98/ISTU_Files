@@ -35,14 +35,14 @@
                 <br>
                 <h3>Список пользователей</h3>
                 <div>
-                    <input type="hidden" id="studentId" />
+                    <input type="hidden" id="userId" />
                     <p>
                         Имя:<br />
-                        <input id="studentName" />
+                        <input id="userName" />
                     </p>
                     <p>
                         Возраст:<br />
-                        <input id="studentAge" type="number" />
+                        <input id="userAge" type="number" />
                     </p>
                     <p>
                         <button id="saveBtn">Сохранить</button>
@@ -78,32 +78,32 @@
 
         ///////////////////
         // Получение всех пользователей
-        async function getStudents() {
+        async function getUsers() {
             // отправляет запрос и получаем ответ
-            const response = await fetch("/api/students", {
+            const response = await fetch("/api/users", {
                 method: "GET",
                 headers: { "Accept": "application/json" }
             });
             // если запрос прошел нормально
             if (response.ok === true) {
                 // получаем данные
-                const students = await response.json();
+                const users = await response.json();
                 const rows = document.querySelector("tbody");
                 // добавляем полученные элементы в таблицу
-                students.forEach(student => rows.append(row(student)));
+                users.forEach(user => rows.append(row(user)));
             }
         }
         // Получение одного пользователя
-        async function getStudent(id) {
-            const response = await fetch(`/api/students/${id}`, {
+        async function getUser(id) {
+            const response = await fetch(`/api/users/${id}`, {
                 method: "GET",
                 headers: { "Accept": "application/json" }
             });
             if (response.ok === true) {
-                const student = await response.json();
-                document.getElementById("studentId").value = student.id;
-                document.getElementById("studentName").value = student.name;
-                document.getElementById("studentAge").value = student.age;
+                const user = await response.json();
+                document.getElementById("userId").value = user.id;
+                document.getElementById("userName").value = user.name;
+                document.getElementById("userAge").value = user.age;
             }
             else {
                 // если произошла ошибка, получаем сообщение об ошибке
@@ -112,19 +112,19 @@
             }
         }
         // Добавление пользователя
-        async function createStudent(studentName, studentAge) {
+        async function createUser(userName, userAge) {
 
-            const response = await fetch("api/students", {
+            const response = await fetch("api/users", {
                 method: "POST",
                 headers: { "Accept": "application/json", "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    name: studentName,
-                    age: parseInt(studentAge, 10)
+                    name: userName,
+                    age: parseInt(userAge, 10)
                 })
             });
             if (response.ok === true) {
-                const student = await response.json();
-                document.querySelector("tbody").append(row(student));
+                const user = await response.json();
+                document.querySelector("tbody").append(row(user));
             }
             else {
                 const error = await response.json();
@@ -132,19 +132,19 @@
             }
         }
         // Изменение пользователя
-        async function editStudent(studentId, studentName, studentAge) {
-            const response = await fetch("api/students", {
+        async function editUser(userId, userName, userAge) {
+            const response = await fetch("api/users", {
                 method: "PUT",
                 headers: { "Accept": "application/json", "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    id: studentId,
-                    name: studentName,
-                    age: parseInt(studentAge, 10)
+                    id: userId,
+                    name: userName,
+                    age: parseInt(userAge, 10)
                 })
             });
             if (response.ok === true) {
-                const student = await response.json();
-                document.querySelector(`tr[data-rowid='${student.id}']`).replaceWith(row(student));
+                const user = await response.json();
+                document.querySelector(`tr[data-rowid='${user.id}']`).replaceWith(row(user));
             }
             else {
                 const error = await response.json();
@@ -152,14 +152,14 @@
             }
         }
         // Удаление пользователя
-        async function deleteStudent(id) {
-            const response = await fetch(`/api/students/${id}`, {
+        async function deleteUser(id) {
+            const response = await fetch(`/api/users/${id}`, {
                 method: "DELETE",
                 headers: { "Accept": "application/json" }
             });
             if (response.ok === true) {
-                const student = await response.json();
-                document.querySelector(`tr[data-rowid='${student.id}']`).remove();
+                const user = await response.json();
+                document.querySelector(`tr[data-rowid='${user.id}']`).remove();
             }
             else {
                 const error = await response.json();
@@ -169,34 +169,34 @@
 
         // сброс данных формы после отправки
         function reset() {
-            document.getElementById("studentId").value =
-                document.getElementById("studentName").value =
-            document.getElementById("studentAge").value = "";
+            document.getElementById("userId").value =
+                document.getElementById("userName").value =
+                document.getElementById("userAge").value = "";
         }
         // создание строки для таблицы
-        function row(student) {
+        function row(user) {
 
             const tr = document.createElement("tr");
-            tr.setAttribute("data-rowid", student.id);
+            tr.setAttribute("data-rowid", user.id);
 
             const nameTd = document.createElement("td");
-            nameTd.append(student.name);
+            nameTd.append(user.name);
             tr.append(nameTd);
 
             const ageTd = document.createElement("td");
-            ageTd.append(student.age);
+            ageTd.append(user.age);
             tr.append(ageTd);
 
             const linksTd = document.createElement("td");
 
             const editLink = document.createElement("button");
             editLink.append("Изменить");
-            editLink.addEventListener("click", async () => await getUser(student.id));
+            editLink.addEventListener("click", async () => await getUser(user.id));
             linksTd.append(editLink);
 
             const removeLink = document.createElement("button");
             removeLink.append("Удалить");
-            removeLink.addEventListener("click", async () => await deleteUser(student.id));
+            removeLink.addEventListener("click", async () => await deleteUser(user.id));
 
             linksTd.append(removeLink);
             tr.appendChild(linksTd);
@@ -209,18 +209,18 @@
         // отправка формы
         document.getElementById("saveBtn").addEventListener("click", async () => {
 
-            const id = document.getElementById("studentId").value;
-            const name = document.getElementById("studentName").value;
-            const age = document.getElementById("studentAge").value;
+            const id = document.getElementById("userId").value;
+            const name = document.getElementById("userName").value;
+            const age = document.getElementById("userAge").value;
             if (id === "")
-                await createStudent(name, age);
+                await createUser(name, age);
             else
-                await editStudent(id, name, age);
+                await editUser(id, name, age);
             reset();
         });
 
         // загрузка пользователей
-        getStudents();
+        getUsers();
 
 
 
