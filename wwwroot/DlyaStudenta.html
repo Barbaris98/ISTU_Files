@@ -37,12 +37,24 @@
                 <div>
                     <input type="hidden" id="userId" />
                     <p>
+                        Фамилия:<br />
+                        <input id="userLastName" />
+                    </p>
+                    <p>
                         Имя:<br />
                         <input id="userName" />
                     </p>
                     <p>
-                        Возраст:<br />
-                        <input id="userAge" type="number" />
+                        Отчество:<br />
+                        <input id="userMiddleName" />
+                    </p>
+                    <p>
+                        Номер зачётной книжки:<br />
+                        <input id="userRecordNumber" type="number" />
+                    </p>
+                    <p>
+                        Дата рождения:<br />
+                        <input id="userDateOfBirth" />
                     </p>
                     <p>
                         <button id="saveBtn">Сохранить</button>
@@ -63,6 +75,7 @@
         Все права защищены
     </footer>
     <script>
+        //#region Скачивание ресурса с сайта через кнопку
         // const button = document.querySelector('#myButton');
         const button = document.getElementById('myButton'); // Этот метод работает на порядок быстрее
         button.addEventListener('click', getImage);
@@ -75,6 +88,8 @@
             //.....
 
         }
+        //#endregion
+
 
         ///////////////////
         // Получение всех пользователей
@@ -102,8 +117,11 @@
             if (response.ok === true) {
                 const user = await response.json();
                 document.getElementById("userId").value = user.id;
+                document.getElementById("userLastName").value = user.lastName;
                 document.getElementById("userName").value = user.name;
-                document.getElementById("userAge").value = user.age;
+                document.getElementById("userMiddleName").value = user.middleName;
+                document.getElementById("userRecordNumber").value = user.recordNumber;
+                document.getElementById("userDateOfBirth").value = user.dateOfBirth;
             }
             else {
                 // если произошла ошибка, получаем сообщение об ошибке
@@ -112,14 +130,17 @@
             }
         }
         // Добавление пользователя
-        async function createUser(userName, userAge) {
+        async function createUser(userLastName, userName, userMiddleName, userRecordNumber, userDateOfBirth) {
 
             const response = await fetch("api/users", {
                 method: "POST",
                 headers: { "Accept": "application/json", "Content-Type": "application/json" },
                 body: JSON.stringify({
+                    lastName: userLastName,
                     name: userName,
-                    age: parseInt(userAge, 10)
+                    middleName: userMiddleName,
+                    recordNumber: parseInt(userRecordNumber, 10),
+                    dateOfBirth: userDateOfBirth
                 })
             });
             if (response.ok === true) {
@@ -138,8 +159,11 @@
                 headers: { "Accept": "application/json", "Content-Type": "application/json" },
                 body: JSON.stringify({
                     id: userId,
+                    lastName: userLastName,
                     name: userName,
-                    age: parseInt(userAge, 10)
+                    middleName: userMiddleName,
+                    recordNumber: parseInt(userRecordNumber, 10),
+                    dateOfBirth: userDateOfBirth
                 })
             });
             if (response.ok === true) {
@@ -170,8 +194,12 @@
         // сброс данных формы после отправки
         function reset() {
             document.getElementById("userId").value =
+                document.getElementById("userLastName").value =
                 document.getElementById("userName").value =
-                document.getElementById("userAge").value = "";
+            document.getElementById("userMiddleName").value =
+            document.getElementById("userDateOfBirth").value =
+            document.getElementById("userRecordNumber").value = "";
+
         }
         // создание строки для таблицы
         function row(user) {
@@ -179,13 +207,25 @@
             const tr = document.createElement("tr");
             tr.setAttribute("data-rowid", user.id);
 
+            const lastNameTd = document.createElement("td");
+            lastNameTd.append(user.lastName);
+            tr.append(lastNameTd);
+
             const nameTd = document.createElement("td");
             nameTd.append(user.name);
             tr.append(nameTd);
 
-            const ageTd = document.createElement("td");
-            ageTd.append(user.age);
-            tr.append(ageTd);
+            const middleNameTd = document.createElement("td");
+            middleNameTd.append(user.middleName);
+            tr.append(middleNameTd);
+
+            const recordNumberTd = document.createElement("td");
+            recordNumberTd.append(user.recordNumber);
+            tr.append(recordNumberTd);
+
+            const dateOfBirthTd = document.createElement("td");
+            dateOfBirthTd.append(user.dateOfBirth);
+            tr.append(dateOfBirthTd)
 
             const linksTd = document.createElement("td");
 
@@ -210,12 +250,15 @@
         document.getElementById("saveBtn").addEventListener("click", async () => {
 
             const id = document.getElementById("userId").value;
+            const lastName = document.getElementById("userLastName").value;
             const name = document.getElementById("userName").value;
-            const age = document.getElementById("userAge").value;
+            const middleName = document.getElementById("userMiddleName").value;
+            const recordNumber = document.getElementById("userRecordNumber").value;
+            const dateOfBirth = document.getElementById("userDateOfBirth").value;
             if (id === "")
-                await createUser(name, age);
+                await createUser(lastName, name, middleName, recordNumber, dateOfBirth);
             else
-                await editUser(id, name, age);
+                await editUser(id, lastName, name, middleName, recordNumber, dateOfBirth);
             reset();
         });
 
@@ -225,7 +268,7 @@
 
 
         //////////////////////
-        //дата и время
+        //#region дата и время
         Data = new Date();
         Year = Data.getFullYear();
         Month = Data.getMonth();
@@ -258,7 +301,7 @@
         elem.appendChild(elemText);
         // добавляем элемент в блок
         timeNowBlock.appendChild(elem);
-
+        //#endregion
     </script>
 </body>
 </html>

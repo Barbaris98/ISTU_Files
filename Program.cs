@@ -1,5 +1,6 @@
 using DekanatDB;
 using ISTU_Files;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -86,8 +87,12 @@ app.MapPut("/api/users", async (User userData, ApplicationContext db) =>
     if (user == null) return Results.NotFound(new { message = "ѕользователь не найден" });
 
     // если пользователь найден, измен€ем его данные и отправл€ем обратно клиенту
-    user.Age = userData.Age;
+    user.LastName = userData.LastName;
     user.Name = userData.Name;
+    user.MiddleName = userData.MiddleName;
+    user.RecordNumber = userData.RecordNumber;
+    user.DateOfBirth = userData.DateOfBirth;
+
     await db.SaveChangesAsync();
     return Results.Json(user);
 });
