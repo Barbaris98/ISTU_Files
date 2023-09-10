@@ -28,6 +28,7 @@
         <section>
             <article>
                 <h3>Справочный материал</h3>
+                <a href="/getFile" class="a">Скачать через ссылку</a>
                 <button id="myButton" type="button">
                     Скачать картинку
                 </button>
@@ -84,7 +85,7 @@
 
             console.log("Меня нажали!"); //  Меня нажали!
 
-            const response = await fetch("/getFile.png");
+            const response = await fetch("/getFile");
             //.....
 
         }
@@ -266,8 +267,6 @@
         getUsers();
         //#endregion
 
-
-        
         //#region дата и время
         Data = new Date();
         Year = Data.getFullYear();

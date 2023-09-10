@@ -22,12 +22,20 @@ app.Map("/getDB", (ApplicationContext db) =>
 });
 
 // функционал скачивания ресурсов с сайта
-app.Map("/getFile.png", () =>
+app.Map("/getFile", () =>
 {
-    string path = "Pic/P1.png";
+    string path = "wwwroot/Pic/P1.png";
+    
     return Results.File(System.Text.Encoding.UTF8.GetBytes(path),
             "image/png",
-            "P1Download.png");
+            "P1Load.png");
+    
+    /*
+    FileStream fileStream = new FileStream(path, FileMode.Open);
+    string contentType = "image/png";
+    string downloadName = "ThePic.png";
+    return Results.File(fileStream, contentType, downloadName);
+    */
 
     /*
     string path = "Pic/P1.png";
@@ -40,8 +48,8 @@ app.Map("/getFile.png", () =>
 });
 
 
-//код приложения, который будет обрабатывать запросы и подключаться к базе данных:
-#region
+
+#region код приложения, который будет обрабатывать запросы и подключаться к базе данных:
 app.MapGet("/api/users", async (ApplicationContext db) => await db.Users.ToListAsync());
 
 app.MapGet("/api/users/{id:int}", async (int id, ApplicationContext db) =>
