@@ -25,17 +25,13 @@ app.Map("/getDB", (ApplicationContext db) =>
 app.Map("/getFile", () =>
 {
     string path = "wwwroot/Pic/P1.png";
-    
-    return Results.File(System.Text.Encoding.UTF8.GetBytes(path),
-            "image/png",
-            "P1Load.png");
-    
-    /*
     FileStream fileStream = new FileStream(path, FileMode.Open);
     string contentType = "image/png";
     string downloadName = "ThePic.png";
     return Results.File(fileStream, contentType, downloadName);
-    */
+
+    // файл повреждается тк ... метод Text скорей всего...
+    //return Results.File(System.Text.Encoding.UTF8.GetBytes(path), "image/png", "P1Load.png");
 
     /*
     string path = "Pic/P1.png";
