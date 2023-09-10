@@ -14,36 +14,19 @@ var app = builder.Build();
 app.UseDefaultFiles(); // поддержка страниц html по умолчанию
 app.UseStaticFiles(); // добавляем поддержку статических файлов
 
-
-app.Map("/getDB", (ApplicationContext db) =>
-{
-    db.Users.ToList();
-
-});
-
 // функционал скачивания ресурсов с сайта
 app.Map("/getFile", () =>
 {
     string path = "wwwroot/Pic/P1.png";
-    FileStream fileStream = new FileStream(path, FileMode.Open);
-    string contentType = "image/png";
-    string downloadName = "ThePic.png";
-    return Results.File(fileStream, contentType, downloadName);
+    //FileStream fileStream = new FileStream(path, FileMode.Open);
+    //string contentType = "image/png";
+    //string downloadName = "ThePic.png";
+    //return Results.File(fileStream, contentType, downloadName);
 
     // файл повреждается тк ... метод Text скорей всего...
-    //return Results.File(System.Text.Encoding.UTF8.GetBytes(path), "image/png", "P1Load.png");
-
-    /*
-    string path = "Pic/P1.png";
-    byte[] fileContent = await File.ReadAllBytesAsync(path);  // считываем файл в массив байтов
-    string contentType = "image/png";       // установка mime-типа
-    string downloadName = "P1Download.png";  // установка загружаемого имени
-    return Results.File(fileContent, contentType, downloadName);
-    */
+    return Results.File(System.Text.Encoding.UTF8.GetBytes(path), "image/png", "P1Load.png");
 
 });
-
-
 
 #region код приложения, который будет обрабатывать запросы и подключаться к базе данных:
 app.MapGet("/api/users", async (ApplicationContext db) => await db.Users.ToListAsync());
@@ -101,8 +84,6 @@ app.MapPut("/api/users", async (User userData, ApplicationContext db) =>
     return Results.Json(user);
 });
 #endregion
-
-
 
 app.Run();
 

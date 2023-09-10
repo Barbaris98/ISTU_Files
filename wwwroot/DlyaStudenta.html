@@ -28,10 +28,13 @@
         <section>
             <article>
                 <h3>Справочный материал</h3>
-                <a href="/getFile" class="a">Скачать через ссылку</a>
-                <button id="myButton" type="button">
-                    Скачать картинку
-                </button>
+                <!-- Скачивание по ссылке -->
+                <a href="/getFile">Скачать через ссылку</a>
+                <br>
+                <!-- Скачивание кнопкой -->
+                <form action='/getFile'>
+                    <input type='submit' value='Скачать'>
+                </form>
                 <br>
                 <br>
                 <h3>Список пользователей</h3>
@@ -78,6 +81,7 @@
     <script>
         //#region Скачивание ресурса с сайта через кнопку
         // const button = document.querySelector('#myButton');
+        /*
         const button = document.getElementById('myButton'); // Этот метод работает на порядок быстрее
         button.addEventListener('click', getImage);
 
@@ -89,6 +93,7 @@
             //.....
 
         }
+        */
         //#endregion
 
 
