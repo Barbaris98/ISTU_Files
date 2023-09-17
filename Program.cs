@@ -10,19 +10,17 @@ using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
 // условная бд с пользователями
 var people = new List<Person>
 {
     new Person("Tom", "12345"),
-    new Person("Sab", "54321")
+    new Person("Sam", "54321")
 };
 
 // аутентификация с помощью куки
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options => options.LoginPath = "/login");
 builder.Services.AddAuthorization();
-
 
 // получаем строку подключения из файла конфигурации
 string? connectoin = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -46,7 +44,7 @@ app.Map("/getFile", () =>
     return Results.File(fileStream, contentType, downloadName);
 
 });
-#region код приложения, который будет обрабатывать запросы и подключаться к базе данных:
+#region  Код приложения, который будет обрабатывать запросы и подключаться к базе данных:
 app.MapGet("/api/users", async (ApplicationContext db) => await db.Users.ToListAsync());
 
 app.MapGet("/api/users/{id:int}", async (int id, ApplicationContext db) =>
@@ -103,8 +101,7 @@ app.MapPut("/api/users", async (User userData, ApplicationContext db) =>
 });
 #endregion
 
-
-
+#region Код аутентификации
 app.MapGet("/login", async (HttpContext context) =>
 {
     context.Response.ContentType = "text/html; charset=utf-8";
@@ -117,6 +114,7 @@ app.MapGet("/login", async (HttpContext context) =>
     </head>
     <body>
         <h2>Login Form</h2>
+        <h4>Test value 'Tom'-'12345' and 'Sam'-'54321'<h4>
         <form method='post'>
             <p>
                 <label>Name</label><br />
@@ -154,7 +152,8 @@ app.MapPost("/login", async (string? returnUrl, HttpContext context) =>
     ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "Cookies");
     // установка аутентификационных куки
     await context.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
-    return Results.Redirect(returnUrl ?? "/");
+
+    return Results.Redirect(returnUrl ?? "/AuthenticationSuccessful.html");
 });
 
 app.MapGet("/logout", async (HttpContext context) =>
@@ -162,12 +161,8 @@ app.MapGet("/logout", async (HttpContext context) =>
     await context.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
     return Results.Redirect("/login");
 });
+#endregion
 
 app.Run();
 
-
 record class Person(string Name, string Password);
-
-
-
-
