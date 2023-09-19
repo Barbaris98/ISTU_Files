@@ -28,16 +28,20 @@
         <section>
             <article>
                 <h3>Справочный материал</h3>
-                <!-- Скачивание по ссылке -->
+                <h2>Испытания и сертификация</h2>
+                <!-- Скачивание по ссылке
                 <a href="/getFile">Скачать через ссылку</a>
-                <br>
-                <!-- Скачивание кнопкой -->
-                <form action='/getFile'>
-                    <input type='submit' value='Скачать'>
-                </form>
-                <br>
-                <br>
-                <h3>Список пользователей</h3>
+                <br>-->
+                <!-- 
+                    <form action='/getFile' align="right">
+                        <input type='submit' value='Скачать'>
+                    </form>
+                    Скачивание кнопкой -->
+                <div>
+                    <p>Методическое пособие по выполнению ЛР<a href="/getFile">,нажмите для скачивания</a></p>
+                    <p>Допускается объединение работ в один скоросшиватель</p>
+                </div>
+                <h3>Список группы</h3>
                 <div>
                     <input type="hidden" id="userId" />
                     <p>
@@ -78,8 +82,8 @@
             <br>
             <div>
                 <form action='/login'>
-                    <input type='submit'value='Пройти Аутентификацию   
-                             
+                    <input type='submit' value='Пройти Аутентификацию
+
                            '>
                 </form>
             </div>
@@ -105,7 +109,6 @@
         }
         */
         //#endregion
-
 
         //#region Таблица пользователей
         // Получение всех пользователей
@@ -315,7 +318,7 @@
         elem.appendChild(elemText);
         // добавляем элемент в блок
         timeNowBlock.appendChild(elem);
-                        //#endregion
+                                //#endregion
     </script>
 </body>
 </html>
