@@ -35,15 +35,43 @@ app.UseAuthentication();   // добавление middleware аутентификации
 app.UseAuthorization();   // добавление middleware авторизации 
 
 // функционал скачивания ресурсов с сайта
-app.Map("/getFile", () =>
+app.Map("/getFileMetodicka", () =>
 {
-    string path = "wwwroot/Pic/P1.png";
+    string path = "wwwroot/Pdf/Metod.pdf";
     FileStream fileStream = new FileStream(path, FileMode.Open);
-    string contentType = "image/png";
-    string downloadName = "ThePic.png";
+    string contentType = "pdf/pdf";
+    string downloadName = "Metodicheskoe_posobie_po_ispytaniam_SPV.pdf";
     return Results.File(fileStream, contentType, downloadName);
 
 });
+app.Map("/getFileГОСТ50529", () =>
+{
+	string path = "wwwroot/Pdf/ГОСТ50529.pdf";
+	FileStream fileStream = new FileStream(path, FileMode.Open);
+	string contentType = "pdf/pdf";
+	string downloadName = "ГОСТ50529.pdf";
+	return Results.File(fileStream, contentType, downloadName);
+
+});
+app.Map("/getFileГОСТ50530", () =>
+{
+	string path = "wwwroot/Pdf/ГОСТ50530.pdf";
+	FileStream fileStream = new FileStream(path, FileMode.Open);
+	string contentType = "pdf/pdf";
+	string downloadName = "ГОСТ50530.pdf";
+	return Results.File(fileStream, contentType, downloadName);
+
+});
+app.Map("/getFileПрактическаяРабота", () =>
+{
+	string path = "wwwroot/Word/ПрактическаяРабота.docx";
+	FileStream fileStream = new FileStream(path, FileMode.Open);
+	string contentType = "docx/docx";
+	string downloadName = "ПрактическаяРабота.docx";
+	return Results.File(fileStream, contentType, downloadName);
+
+});
+
 #region  Код приложения, который будет обрабатывать запросы и подключаться к базе данных:
 app.MapGet("/api/users", async (ApplicationContext db) => await db.Users.ToListAsync());
 
