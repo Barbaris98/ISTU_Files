@@ -10,11 +10,11 @@ using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// условная бд с пользователями
+// условная бд с для аутентификация
 var people = new List<Person>
 {
-    new Person("Tom", "12345"),
-    new Person("Sam", "54321")
+    new Person("Student", "12345"),
+    new Person("Admin", "12345ADM")
 };
 
 // аутентификация с помощью куки
@@ -142,7 +142,7 @@ app.MapGet("/login", async (HttpContext context) =>
     </head>
     <body>
         <h2>Login Form</h2>
-        <h4>Test value 'Tom'-'12345' and 'Sam'-'54321'<h4>
+        <h4>Продолжить как Студент, по умолчанию 'Student'-'12345' или как Admin 'Admin'-'12345ADM'<h4>
         <form method='post'>
             <p>
                 <label>Name</label><br />
