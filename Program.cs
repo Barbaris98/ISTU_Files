@@ -34,7 +34,7 @@ app.UseStaticFiles(); // добавляем поддержку статических файлов
 app.UseAuthentication();   // добавление middleware аутентификации 
 app.UseAuthorization();   // добавление middleware авторизации 
 
-// функционал скачивания ресурсов с сайта
+// функционал скачивания ресурсов сайта
 app.Map("/getFileMetodicka", () =>
 {
     string path = "wwwroot/Pdf/Metod.pdf";
